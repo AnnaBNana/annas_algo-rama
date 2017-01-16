@@ -46,6 +46,15 @@ DLL.prototype.show = function () {
   return this;
 };
 
+// reverse a DLL
+DLL.prototype.reverse = function() {
+  var curr = this.head
+  if (curr && curr.next){
+    while ()
+  }
+  return this;
+}
+
 dll1 = new DLL();
 dll1.push(1).push(3).push(5).push(7).show();
 console.log(dll1);

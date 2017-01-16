@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>recursiply</title>
+    <script type="text/javascript">
+    function recursiply(a,b){
+      if (b == 1) {
+        return a;
+      } else {
+        b --;
+        return recursiply(a,b) + a;
+      }
+    }
+
+    var x = recursiply(5,4);
+    console.log(x);
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
