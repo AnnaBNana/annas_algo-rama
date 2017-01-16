@@ -8,9 +8,6 @@ function remainder(a,b){
 function diversion(a,b){
   if (a < b){
     return a;
-  }
-  else if (a < b*2){
-    return a - b;
   } else {
     a = a-b;
     return diversion(a,b);
