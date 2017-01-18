@@ -1,10 +1,3 @@
-function remainder(a,b){
-  return a % b;
-}
-
-// var x = remainder(15,4);
-// console.log(x);
-
 function diversion(a,b){
   if (a < b){
     return a;
