@@ -16,7 +16,7 @@ function dedupe(str){
   return newStr;
 }
 
-console.log(dedupe("Snaps! crackles! pops!"));
+console.log(dedupe("Snaps! crackles! Pops!"));
 
 function uniqueLetters(str) {
   var letters = {},
