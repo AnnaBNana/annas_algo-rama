@@ -54,3 +54,25 @@ BST.prototype.contains = function(val, pointer) {
     return true;
   }
 }
+BTNode.prototype.height = function(){
+  var left_depth,
+      right_depth;
+  if(!this) {
+    return 0;
+  }
+  if (this.left) {
+    left_depth = this.left.height();
+  } else {
+    left_depth = 0;
+  }
+  if (this.right) {
+    right_depth = this.right.height();
+  } else {
+    right_depth = 0;
+  }
+  if (left_depth > right_depth) {
+    return left_depth + 1;
+  } else {
+    return right_depth + 1;
+  }
+}
