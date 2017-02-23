@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Basic 13</title>
+  </head>
+  <body>
+    <p>Open your console to view the output.</p>
+    <script type="text/javascript">
+      // Basic 13
+      // here's an array we can use for all the algorithms that require a given array
+      var x = [3,5,9,2,7,1,4];
+      //Print 1 to 255
+      function printRange(){
+        for (var i = 1; i < 256; i++){
+          console.log(i);
+        }
+      }
+      printRange();
+      // print odds 1 to 255
+      function printOddsRange(){
+        for (var i = 1; i < 256; i+=2) {
+          console.log(i);
+        }
+      }
+      printOddsRange();
+      // print values and sum 0 to 255
+      function valsAndSum(){
+        var sum = 0;
+        for (var i = 0; i < 256; i++){
+          console.log(i);
+          sum += i;
+          console.log(sum);
+        }
+      }
+      valsAndSum();
+      // print values in given array
+      function printArrayVals(arr){
+        for (var i = 0; i < arr.length; i++) {
+          console.log(arr[i]);
+        }
+      }
+      printArrayVals(x);
+      //print max value in array
+      function printMax(arr){
+        // assume array is an array and it is not empty
+        var max = arr[0]
+        for (var i = 1; i < arr.length; i++){
+          if (arr[i] > max){
+            max = arr[i];
+          }
+        }
+        console.log("max array value:", max);
+      }
+      printMax(x);
+      // print array value's average
+      function printAverage(arr) {
+        var sum = 0;
+        for (var i = 0; i < arr.length; i++) {
+          sum += arr[i];
+        }
+        console.log(sum/arr.length);
+      }
+      printAverage(x);
+      // return array odds
+      function arrayOfOdds() {
+        var arr = [];
+        for (var i = 1; i < 256; i+=2) {
+          arr.push(i)
+        }
+        console.log(arr);
+      }
+      arrayOfOdds();
+      //square values in an array
+      function squareArrayValues(arr){
+        for (var i = 0; i < arr.length; i++) {
+          arr[i] = arr[i] * arr[i]
+        }
+        return arr
+      }
+      // a function call is equal to whatever that function returns!
+      var squared = squareArrayValues(x);
+      console.log(squared);
+      //return a count of all arrays that are greater than a given value
+      function countGreaterThan(arr,y){
+        var count = 0;
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] > y) {
+            count++;
+          }
+        }
+        return count;
+      }
+      console.log(countGreaterThan(x,3));
+      // oh no, our array has changed! let's change it back to its original set of values.
+      x = [3,5,9,2,7,1,4];
+      // this happens due to something called passage by reference. Don't worry about it for now, but just know that if a function changes an array that is in the global scope, it changes it in that scope, not just within the function. If this doesn't make sense, don't worry! You'll be able to make sense of it soon.
+      console.log(countGreaterThan(x,3));
+      // now we get the expected results!
+      // zero negative array values
+      function zeroNegVals(arr) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] < 0) {
+            arr[i] = 0;
+          }
+        }
+        return arr;
+      }
+      //make sure our array has negative values!
+      x = [-3,5,9,2,7,-1,4];
+      console.log(zeroNegVals(x));
+      // print the max value, min value, and avg of values in an array
+      function printMaxMinAvg(arr) {
+        var max = arr[0];
+        var min = arr[0];
+        var sum = arr[0];
+        for (var i = 1; i < arr.length; i++) {
+          if (arr[i] > max) {
+            max = arr[i];
+          }
+          if (arr[i] < min) {
+            min = arr[i];
+          }
+          sum += i;
+        }
+        console.log(max, min, sum/arr.length);
+      }
+      printMaxMinAvg(x);
+      // shift all values in array to the left and make the last position's value 0
+      function shiftVals(arr) {
+        for (var i = 0; i < arr.length - 1; i++) {
+          arr[i] = arr[i + 1]
+        }
+        arr[i] = 0;
+        return arr
+      }
+      console.log(shiftVals(x));
+      // replace negative values in an array with a string
+      function stringForNeg(arr) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] < 0) {
+            arr[i] = "Dojo";
+          }
+        }
+        return arr;
+      }
+      x = [-3,5,9,2,7,-1,4];
+      console.log(stringForNeg(x));
+    </script>
+  </body>
+</html>
