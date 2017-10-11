@@ -1,5 +1,5 @@
-#Anna's Alg-o-Rama
-###Welcome!
+# Anna's Alg-o-Rama
+### Welcome!
 I'm an instructor at Coding Dojo, a 14-week web development bootcamp. This repo contains algorithm solutions for weeks 7-10.
 * Week 7:
   1. Stacks and Queues implemented as singly linked lists
