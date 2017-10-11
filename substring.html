@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Greatest Common Substring</title>
+    </head>
+    <script>
+        function substring(stringOne, stringTwo){
+            var curr = "", sub = "", trackI, found = false;
+            for (var i = 0; i < stringOne.length; i++) {
+                trackI = i;
+                for (var j = 0; j < stringTwo.length; j++) {
+                    if (stringOne[i] === stringTwo[j]) {
+                        if (!found) {
+                            found = true;
+                        }
+                        curr += stringTwo[j];
+                        i++;
+                    } else {
+                        if (found) {
+                            i = trackI;
+                            if (curr.length > sub.length) {
+                                sub = curr;
+                            }
+                            curr = "";
+                            found = false;
+                        }
+                    }
+                }
+                if (trackI >= 0) {
+                    i = trackI;
+                    trackI = undefined;
+                }
+                if (curr.length > sub.length) {
+                    sub = curr;
+                }
+                curr = "";
+            }
+            return sub
+        }
+
+
+        var x = substring("racecar", "cartoyrace")
+        console.log("this is the answer:", x);
+    </script>
+    <body>
+
+    </body>
+</html>

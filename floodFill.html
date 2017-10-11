@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            padding: 20px;
+        }
+        #container {
+            background-color: #212121;
+            width: 500px;
+            height: 500px;
+            padding: 5px 0 5px 5px;
+            display: inline-block;
+        }
+        #color-options {
+            background-color: #212121;
+            width: 60px;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .color-node {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .color-key {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+        }
+    </style>
+    </head>
+    <body onload="drawBoxes()">
+        <div id="container"></div>
+        <div id="color-options"></div>
+        <script>
+            function drawBoxes() {
+                let container = document.getElementById("container"),
+                colorOptions = document.getElementById("color-options"),
+                node,
+                textnode,
+                colors = ["rgb(40, 53, 147)", "rgb(0, 172, 193)", "rgb(255, 193, 7)", "rgb(244, 81, 30)"],
+                newColor = colors[0]
+                for (let i = 0; i < 420; i++) {
+                    rand = Math.floor(Math.random() * colors.length)
+                    color = colors[rand]
+                    node = document.createElement("div")
+                    node.className = "color-node"
+                    node.id = i
+                    node.style.backgroundColor = color
+                    node.addEventListener("click", function(){
+                        currColor = this.style.backgroundColor
+                        floodFill(this, newColor, currColor);
+                    })
+                    container.appendChild(node)
+                }
+                for (let i in colors) {
+                    node = document.createElement("div")
+                    node.className = "color-key"
+                    node.style.backgroundColor = colors[i]
+                    node.addEventListener("click", function(){
+                        newColor = this.style.backgroundColor
+                    })
+                    colorOptions.appendChild(node)
+                }
+                colorOptions.style.height = (55 * colors.length) + 4 + "px"
+            }
+
+            function floodFill(node, newColor, currColor) {
+                console.log(newColor, currColor)
+                if (newColor == currColor) {
+                    console.log("not so fast")
+                    return;
+                }
+                let top, bottom, left, right,
+                topId = parseInt(node.id) - 20,
+                bottomId = parseInt(node.id) + 20,
+                leftId = parseInt(node.id) - 1,
+                rightId = parseInt(node.id) + 1;
+                node.style.backgroundColor = newColor
+                if (topId > -1){
+                    top = document.getElementById(topId)
+                    if (top.style.backgroundColor == currColor){
+                        floodFill(top, newColor, currColor);
+                    }
+                }
+                if (bottomId < 420) {
+                    bottom = document.getElementById(bottomId);
+                    if (bottom.style.backgroundColor == currColor) {
+                        floodFill(bottom, newColor, currColor);
+                    }
+                }
+                if ((parseInt(node.id) + 1) % 20 != 0) {
+                    right = document.getElementById(rightId);
+                    if (right.style.backgroundColor == currColor) {
+                        floodFill(right, newColor, currColor);
+                    }
+                }
+                if (node.id % 20 != 0) {
+                    left = document.getElementById(leftId);
+                    if (left.style.backgroundColor == currColor) {
+                        floodFill(left, newColor, currColor);
+                    }
+                }
+            }
+
+        </script>
+
+    </body>
+</html>
