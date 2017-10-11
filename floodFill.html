@@ -45,68 +45,94 @@
         <div id="container"></div>
         <div id="color-options"></div>
         <script>
+
+            // for chapter 9 algorithm: flood fill
+
+            // this function creates the user interface
             function drawBoxes() {
+                // get target divs so we can add colored squares to them.
+                // we need to fill both the main box and the key
                 let container = document.getElementById("container"),
                 colorOptions = document.getElementById("color-options"),
+                // these will represent the boxes we are adding to the main divzz
                 node,
                 textnode,
-                colors = ["rgb(40, 53, 147)", "rgb(0, 172, 193)", "rgb(255, 193, 7)", "rgb(244, 81, 30)"],
+                // set up an array of all the colors we want to use
+                colors = ["rgb(40, 53, 147)", "rgb(0, 172, 193)", "rgb(255, 193, 7)"],
                 newColor = colors[0]
+                // loop once for each box we want to add to the main box
                 for (let i = 0; i < 420; i++) {
+                    // select a random number based on the length of the colors array
                     rand = Math.floor(Math.random() * colors.length)
+                    // select a string from the colors array based on the above index
                     color = colors[rand]
+                    // create box elements in the DOM
                     node = document.createElement("div")
                     node.className = "color-node"
                     node.id = i
                     node.style.backgroundColor = color
+                    // listen for clicks on those divzz
                     node.addEventListener("click", function(){
+                        // when a box is clicked, collect information about the target box's color
                         currColor = this.style.backgroundColor
-                        floodFill(this, newColor, currColor);
+                        // if the new color and current color are not the same, start the flood fill process given the color we want to use and the color we would like to replace it with
+                        if (newColor != currColor) {
+                           floodFill(this, newColor, currColor); 
+                        }
                     })
+                    // add the new box to the main box
                     container.appendChild(node)
                 }
+                // loop through the colors array
                 for (let i in colors) {
+                    // create new boxes to add to the color key
                     node = document.createElement("div")
                     node.className = "color-key"
                     node.style.backgroundColor = colors[i]
+                    // listen for click to key boxes, and change the new color variable accordingly
                     node.addEventListener("click", function(){
                         newColor = this.style.backgroundColor
                     })
+                    // add the new box to the key box
                     colorOptions.appendChild(node)
                 }
+                // set the height of the key div according to the number of elements in the colors array
                 colorOptions.style.height = (55 * colors.length) + 4 + "px"
             }
 
+            // this function performs the fill action
             function floodFill(node, newColor, currColor) {
-                console.log(newColor, currColor)
-                if (newColor == currColor) {
-                    console.log("not so fast")
-                    return;
-                }
+                // declare variables we want to use later
                 let top, bottom, left, right,
+                // get the id's of the surrounding nodes
                 topId = parseInt(node.id) - 20,
                 bottomId = parseInt(node.id) + 20,
                 leftId = parseInt(node.id) - 1,
                 rightId = parseInt(node.id) + 1;
+                // reset color of current node
                 node.style.backgroundColor = newColor
+                // check if topId is valid and the color is the same as our original node, if so, recurse
                 if (topId > -1){
                     top = document.getElementById(topId)
                     if (top.style.backgroundColor == currColor){
                         floodFill(top, newColor, currColor);
                     }
                 }
+                // check if bottomId is valid and the color is the same as our original node, if so, recurse
                 if (bottomId < 420) {
                     bottom = document.getElementById(bottomId);
                     if (bottom.style.backgroundColor == currColor) {
                         floodFill(bottom, newColor, currColor);
                     }
                 }
+                // check if rightId is valid and the color is the same as our original node, if so, recurse
                 if ((parseInt(node.id) + 1) % 20 != 0) {
                     right = document.getElementById(rightId);
                     if (right.style.backgroundColor == currColor) {
                         floodFill(right, newColor, currColor);
                     }
                 }
+                // check if leftId is valid and the color is the same as our original node, if so, recurse
                 if (node.id % 20 != 0) {
                     left = document.getElementById(leftId);
                     if (left.style.backgroundColor == currColor) {
